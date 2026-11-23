@@ -1,7 +1,7 @@
 # airdcpp-qt6: plan
 
-Status: draft, for Joe's review (2026-11-23). Nothing here is decided until the decisions in §4
-are made, and the project may not go ahead.
+Status: decisions made (Joe, 2026-11-23: "go with the recommended decisions"). The project is
+still not committed: whether to go ahead is decided once Q0 is costed (Q-D4).
 
 ## 1. Why, and what exists
 
@@ -48,7 +48,7 @@ Qt widgets subscribe to the core's C++ managers and listeners in one process.
 - **Against:** the client tracks the core's internal C++ API, which upstream changes freely. Every
   core update is a porting job. The Windows GUI shows what that costs: about 2.7 MB of glue.
 
-### B. A client of the Web API (recommended)
+### B. A client of the Web API (chosen, Q-D1)
 
 The app talks to an `airdcppd` over the documented Web API: HTTP plus WebSocket JSON, described as
 an API Blueprint in [airdcpp-apidocs](https://github.com/airdcpp-web/airdcpp-apidocs).
@@ -109,14 +109,16 @@ Not planned: reimplementing the core, and protocol extensions (sublevels' NMDCpb
 Nicotina remains the Ariadne-native client. This is a conventional desktop client, though sublevels
 would use it as one more black-box test client.
 
-## 4. Decisions for Joe
+## 4. Decisions (Joe, 2026-11-23)
 
-| # | Question | Proposed |
+All taken as proposed.
+
+| # | Question | Decided |
 |---|---|---|
 | Q-D1 | Architecture | B, a Web API client that owns a local daemon by default |
 | Q-D2 | UI toolkit | Qt 6 Widgets, not QML (cvcpkg has no QML on linux x86_64, and Widgets suit a dense desktop UI) |
 | Q-D3 | eiskaltdcpp-qt | reuse patterns and individual widgets, not a wholesale fork |
-| Q-D4 | Go or no-go | decide after Q0 is costed in more detail; Q0 alone is small |
+| Q-D4 | Go or no-go | decide after Q0 is costed: map each Windows GUI frame to Web API endpoints, list the gaps, and estimate Q0-Q2 |
 | Q-D5 | Upstream | offer it to the AirDC++ project once Q2 works, since upstream is looking for desktop GUI maintainers |
 | Q-D6 | Name | keep `airdcpp-qt6` as the repository name; the app's display name to be agreed with upstream if offered |
 
